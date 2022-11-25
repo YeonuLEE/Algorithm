@@ -1,0 +1,25 @@
+import sys
+sys.stdin = open("input.txt","r")
+T = int(input()) #테스트 케이스 값
+
+def count(arr):
+    ret = 0
+    for lst in arr:
+        cnt = 0
+        for j in range(len(lst)):
+            if lst[j]: #값이 0이 아닌경우
+                cnt += 1
+            else:
+                if cnt == K:
+                    ret += 1
+                cnt = 0
+    return ret
+
+for test_case in range(1, T+1):
+    N, K = map(int, input().split())
+    arr = [list(map(int, input().split())) + [0] for _ in range(N)] + [[0]*(N+1)]
+    arr_t = list(map(list,zip(*arr)))
+    ans = 0
+
+    ans = count(arr) + count(arr_t)
+    print(f'#{test_case} {ans}')
